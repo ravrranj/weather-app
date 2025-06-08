@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather Report</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 40px;
+            color: #333;
+        }
+
+        .weather-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .weather-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .temperature {
+            font-size: 32px;
+            color: #f57c00;
+            margin: 10px 0;
+        }
+
+        .description {
+            font-style: italic;
+            color: #555;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3367d6;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>🌦️ Weather App</h1>
+
+<form action="/weather-ui" method="get">
+    <input type="text" name="city" placeholder="Enter city..." />
+    <button type="submit">Get Weather</button>
+</form>
+
+<div class="weather-box" th:if="${city}">
+    <div class="weather-icon">
+        <img th:src="${iconUrl}" alt="Weather Icon" />
+    </div>
+
+    <h2 th:text="'Weather in ' + ${city}">Weather in City</h2>
+    <p class="temperature" th:text="${temperature + ' °C'}">-- °C</p>
+    <p class="description" th:text="${description}">Weather description</p>
+</div>
+
+<p class="error" th:if="${error}" th:text="${error}">Error message here</p>
+</body>
+</html>
